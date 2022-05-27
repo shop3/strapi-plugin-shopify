@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shopify_sessions",
+  "info": {
+    "singularName": "session",
+    "pluralName": "sessions",
+    "displayName": "Session",
+    "name": "Session"
+  },
+  "options": {
+    "timestamps": true,
+    "increments": true,
+    "draftAndPublish": false,
+    "populateCreatorFields": false
+  },
+  "attributes": {
+    "uid": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "configurable": false
+    },
+    "shop": {
+      "type": "string",
+      "required": true,
+      "configurable": false
+    },
+    "state": {
+      "type": "string",
+      "required": true,
+      "configurable": false
+    },
+    "scope": {
+      "type": "string",
+      "configurable": false
+    },
+    "expires": {
+      "type": "datetime",
+      "configurable": false
+    },
+    "isOnline": {
+      "type": "boolean",
+      "configurable": false
+    },
+    "accessToken": {
+      "type": "string",
+      "configurable": false,
+      "private": true
+    },
+    "onlineAccessInfo": {
+      "type": "json",
+      "configurable": false
+    }
+  }
+}

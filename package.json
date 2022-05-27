@@ -1,0 +1,63 @@
+{
+  "name": "strapi-plugin-shopify",
+  "version": "0.0.0",
+  "description": "Integrate Shopify in your Strapi application.",
+  "license": "MIT",
+  "files": [
+    "server",
+    "strapi-server.js"
+  ],
+  "strapi": {
+    "name": "shopify",
+    "displayName": "Shopify",
+    "description": "Integrate Shopify in your Strapi application.",
+    "kind": "plugin"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/strapify/strapi-plugin-shopify.git"
+  },
+  "scripts": {
+    "release": "standard-version",
+    "lint": "eslint --fix .",
+    "lint:staged": "eslint --fix",
+    "format": "prettier --write .",
+    "husky:install": "husky install",
+    "pre-commit": "lint-staged",
+    "commit-msg": "commitlint --edit"
+  },
+  "dependencies": {
+    "@shopify/shopify-api": "^2.0.0"
+  },
+  "peerDependencies": {
+    "@strapi/strapi": "4.*",
+    "@strapi/utils": "4.*",
+    "koa-body": "4.*",
+    "qs": "6.*"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "@commitlint/cli": "^17.0.1",
+    "@commitlint/config-conventional": "^17.0.0",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.30.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^12.4.2",
+    "prettier": "^2.6.2",
+    "standard-version": "^9.5.0"
+  },
+  "engines": {
+    "node": ">=12.x.x <=16.x.x",
+    "npm": ">=6.0.0"
+  },
+  "lint-staged": {
+    "*.(ts|tsx|js)": [
+      "npm run lint:staged"
+    ]
+  }
+}

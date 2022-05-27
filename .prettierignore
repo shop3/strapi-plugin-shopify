@@ -1,0 +1,6 @@
+node_modules
+.eslintrc.back.js
+.eslintrc.front.js
+.eslintrc.js
+README.md
+package-lock.json

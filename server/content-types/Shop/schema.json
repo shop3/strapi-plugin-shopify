@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shopify_shops",
+  "info": {
+    "singularName": "shop",
+    "pluralName": "shops",
+    "displayName": "Shop",
+    "name": "Shop"
+  },
+  "options": {
+    "timestamps": true,
+    "increments": true,
+    "draftAndPublish": false,
+    "populateCreatorFields": false
+  },
+  "attributes": {
+    "domain": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "configurable": false
+    },
+    "email": {
+      "type": "string",
+      "configurable": false
+    },
+    "installed": {
+      "type": "boolean",
+      "required": true,
+      "configurable": false
+    }
+  }
+}
