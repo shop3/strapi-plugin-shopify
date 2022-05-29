@@ -7,6 +7,7 @@ Integrate Shopify in your Strapi application.
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Middlewares Configuration](#middlewares-configuration)
+- [Shopify Configuration](#shopify-configuration)
 - [Environment Variables](#environment-variables)
 - [Endpoints](#endpoints)
 
@@ -22,7 +23,7 @@ npm install --save strapi-plugin-shopify
 
 ## Middlewares configuration
 
-Webhooks are authenticated with HMAC calculated on the raw body, `strapi::body` middleware should be configured to pass the unparsed body as following:
+Webhooks are authenticated with **HMAC** calculated on the raw body, `strapi::body` middleware should be configured to pass the unparsed body as following:
 
 ```js
 {
@@ -33,7 +34,7 @@ Webhooks are authenticated with HMAC calculated on the raw body, `strapi::body` 
 },
 ```
 
-If you want to serve an embedded app directly from Strapi you will find that default CSP policies will not allow to do that, `strapi::security` middleware should be configured as following *(this configuration should be used only if you have problem with the embedded app iframe)*:
+If you want to serve an embedded app directly from Strapi you will find that default **CSP policies** will not allow to do that, `strapi::security` middleware should be configured as following *(this configuration should be used only if you have problem with the embedded app iframe)*:
 
 ```js
 {
@@ -49,6 +50,16 @@ If you want to serve an embedded app directly from Strapi you will find that def
   },
 },
 ```
+
+## Shopify Configuration
+
+The Shopify application should be configured as follow:
+- App URL should be set as `https://your-domain.com/api/shopify`
+- Allowed redirection URL(s) should have both
+  - `https://your-domain.com/api/shopify/install/callback`
+  - `https://your-domain.com/api/shopify/auth/callback`
+
+![Screenshot illustrating how to configure the Shopify application](https://github.com/strapify/strapi-plugin-shopify/blob/main/assets/screenshot-create-shopify-app.jpg)
 
 ## Environment Variables
 
@@ -72,8 +83,8 @@ This are the endpoints exposed by this plugin:
 | GET | /api/shopify | the entry point of the application, it handles installation and authentication |
 | POST | /api/shopify/webhooks | the default webhooks endpoint called by Shopify |
 | GET | /api/shopify/install | the installation endpoint, should not be called directly, use /api/shopify instead |
-| GET | /api/shopify/install/callback | the installation callback endpoint, should not be called only by Shopify |
+| GET | /api/shopify/install/callback | the installation callback endpoint, should be called only by Shopify |
 | GET | /api/shopify/auth | the authentication endpoint, should not be called directly, use /api/shopify instead |
-| GET | /api/shopify/auth/callback | the authentication callback endpoint, should not be called only by Shopify |
+| GET | /api/shopify/auth/callback | the authentication callback endpoint, should be called only by Shopify |
 | GET | /api/shopify/shop | this endpoint should be called to get the authenticated shop data |
 
