@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2](https://github.com/strapify/strapi-plugin-shopify/compare/v0.0.1...v0.0.2) (2022-06-21)
+
+
+### Features
+
+* added current user endpoint ([af76cf6](https://github.com/strapify/strapi-plugin-shopify/commit/af76cf61d39f6fc3939f433a7d1eabdbc58e21fa))
+* added logout endpoint ([af5b752](https://github.com/strapify/strapi-plugin-shopify/commit/af5b75272901c164a6a0f236f55250ccd8e5e1b0))
+* **settings:** created admin settings page and api endpoint ([8b26e27](https://github.com/strapify/strapi-plugin-shopify/commit/8b26e27ad131fc8fe427cf7c4e940de161e91fd8))
+
 ### 0.0.1 (2022-05-27)
 
 

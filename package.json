@@ -1,6 +1,6 @@
 {
   "name": "strapi-plugin-shopify",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Integrate Shopify in your Strapi application.",
   "license": "MIT",
   "files": [
