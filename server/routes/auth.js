@@ -21,4 +21,13 @@ module.exports = [
       policies: ['plugin::shopify.valid-query-hmac'],
     },
   },
+  {
+    method: 'POST',
+    path: '/shopify/auth/logout',
+    handler: 'auth.logout',
+    config: {
+      prefix: '',
+      policies: ['plugin::shopify.is-authenticated'],
+    },
+  },
 ];

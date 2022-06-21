@@ -29,4 +29,11 @@ module.exports = ({ strapi }) => ({
     const utils = strapi.service('plugin::shopify.utils');
     ctx.redirect(`${redirectUrl}?${utils.generateQuery({ shop, host })}`);
   },
+
+  async logout(ctx) {
+    const result = await Shopify.Utils.deleteCurrentSession(ctx.req, ctx.res, true);
+    return {
+      success: result,
+    };
+  },
 });
