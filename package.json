@@ -30,10 +30,17 @@
     "@shopify/shopify-api": "^2.0.0"
   },
   "peerDependencies": {
-    "@strapi/strapi": "4.*",
-    "@strapi/utils": "4.*",
-    "koa-body": "4.*",
-    "qs": "6.*"
+    "@strapi/design-system": "1.1.1",
+    "@strapi/helper-plugin": "4.1.12",
+    "@strapi/strapi": "4.1.12",
+    "@strapi/utils": "4.1.12",
+    "axios": "0.24.0",
+    "koa-body": "4.2.0",
+    "prop-types": "15.8.1",
+    "qs": "6.10.1",
+    "react": "17.0.2",
+    "react-intl": "5.20.2",
+    "styled-components": "5.3.3"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.18.2",
