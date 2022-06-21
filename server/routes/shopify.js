@@ -21,4 +21,13 @@ module.exports = [
       policies: ['plugin::shopify.valid-body-hmac'],
     },
   },
+  {
+    method: 'GET',
+    path: '/shopify/me',
+    handler: 'shopify.me',
+    config: {
+      prefix: '',
+      policies: ['plugin::shopify.is-authenticated'],
+    },
+  },
 ];

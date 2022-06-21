@@ -47,4 +47,13 @@ module.exports = ({ strapi }) => ({
       ctx.throw(404, 'Webhook not found.');
     }
   },
+
+  async me(ctx) {
+    const session = await Shopify.Utils.loadCurrentSession(ctx.req, ctx.res, true);
+    if (session) {
+      ctx.send(session.onlineAccessInfo.associated_user);
+    } else {
+      ctx.throw(404, 'Session not found');
+    }
+  },
 });
