@@ -4,7 +4,9 @@
   "description": "Integrate Shopify in your Strapi application.",
   "license": "MIT",
   "files": [
+    "admin",
     "server",
+    "strapi-admin.js",
     "strapi-server.js"
   ],
   "strapi": {
