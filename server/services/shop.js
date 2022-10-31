@@ -51,11 +51,14 @@ module.exports = createCoreService('plugin::shopify.shop', ({ strapi }) => ({
   async install(shop, token) {
     try {
       const shopDb = await strapi.db.query('plugin::shopify.shop').findOne({ where: { domain: shop } });
+      const lifecycles = strapi.service('plugin::shopify.lifecycles');
+      await lifecycles.run('beforeInstall', shop);
       if (!shopDb) {
         await this.create({ domain: shop, installed: true }, token);
       } else {
         await this.update(shopDb.id, { domain: shop, installed: true }, token);
       }
+      await lifecycles.run('afterInstall', shop);
       strapi.log.info(`Shop ${shop} installed successfully`);
     } catch (e) {
       strapi.log.error(`Failed to install ${shop} - ${e.message}`);
@@ -68,7 +71,10 @@ module.exports = createCoreService('plugin::shopify.shop', ({ strapi }) => ({
       if (!shopDb) {
         strapi.log.error(`Shop ${shop} not found`);
       } else {
+        const lifecycles = strapi.service('plugin::shopify.lifecycles');
+        await lifecycles.run('beforeUninstall', shop);
         await this.update(shopDb.id, { domain: shop, installed: false });
+        await lifecycles.run('afterUninstall', shop);
         await strapi.service('plugin::shopify.session').deleteShopSessions(shop);
         strapi.log.info(`Shop ${shop} uninstalled successfully`);
       }
