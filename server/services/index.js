@@ -6,6 +6,7 @@ const shopify = require('./shopify');
 const utils = require('./utils');
 const webhooks = require('./webhooks');
 const lifecycles = require('./lifecycles');
+const billing = require('./billing');
 
 module.exports = {
   session,
@@ -14,4 +15,5 @@ module.exports = {
   utils,
   webhooks,
   lifecycles,
+  ...billing,
 };

@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shopify_usage_records",
+  "info": {
+    "singularName": "usage-record",
+    "pluralName": "usage-records",
+    "displayName": "Usage Record",
+    "name": "Usage Record"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "subscription": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::shopify.subscription",
+      "inversedBy": "usage_records",
+      "required": true,
+      "configurable": false
+    }
+  }
+}

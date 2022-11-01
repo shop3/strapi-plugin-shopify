@@ -5,6 +5,7 @@ const install = require('./install');
 const settings = require('./settings');
 const shop = require('./shop');
 const shopify = require('./shopify');
+const billing = require('./billing');
 
 module.exports = {
   auth,
@@ -12,4 +13,5 @@ module.exports = {
   settings,
   shop,
   shopify,
+  ...billing,
 };

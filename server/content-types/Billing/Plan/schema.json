@@ -1,0 +1,68 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shopify_plans",
+  "info": {
+    "singularName": "plan",
+    "pluralName": "plans",
+    "displayName": "Plan",
+    "name": "Plan"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "configurable": false
+    },
+    "recurringPrice": {
+      "type": "decimal",
+      "required": true,
+      "min": 0,
+      "configurable": false
+    },
+    "recurringInterval": {
+      "type": "enumeration",
+      "enum": [
+        "EVERY_30_DAYS",
+        "ANNUAL"
+      ],
+      "required": true,
+      "configurable": false
+    },
+    "usageTerms": {
+      "type": "text",
+      "required": true,
+      "configurable": false
+    },
+    "usageCappedAmount": {
+      "type": "decimal",
+      "required": true,
+      "min": 0,
+      "default": 0,
+      "configurable": false
+    },
+    "currencyCode": {
+      "type": "enumeration",
+      "enum": [
+        "USD"
+      ],
+      "required": true,
+      "default": "USD",
+      "configurable": false
+    },
+    "trialDays": {
+      "type": "integer",
+      "required": true,
+      "min": 0,
+      "configurable": false
+    },
+    "test": {
+      "type": "boolean",
+      "default": false,
+      "required": true,
+      "configurable": false
+    }
+  }
+}
