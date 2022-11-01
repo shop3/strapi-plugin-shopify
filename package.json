@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/strapify/strapi-plugin-shopify.git"
+    "url": "https://github.com/shop3/strapi-plugin-shopify.git"
   },
   "scripts": {
     "release": "standard-version",
