@@ -75,7 +75,7 @@ const Settings = () => {
                       file: './config/plugins.js',
                       link: (
                         <DocumentationLink
-                          href="https://github.com/strapify/strapi-plugin-shopify#readme"
+                          href="https://github.com/shop3/strapi-plugin-shopify#readme"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
