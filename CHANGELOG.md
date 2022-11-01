@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/shop3/strapi-plugin-shopify/compare/v0.0.4...v0.0.5) (2022-11-01)
+
+
+### Features
+
+* added shopify lifecycles ([3198df3](https://github.com/shop3/strapi-plugin-shopify/commit/3198df37ca2c218dba8bc780eedf18ad9936537c))
+* added valid-header-hmac policy ([1ab02a4](https://github.com/shop3/strapi-plugin-shopify/commit/1ab02a43b4b80e8056b552134686877b06283376))
+* initial version of billing feature ([d077154](https://github.com/shop3/strapi-plugin-shopify/commit/d07715408a495d2c5263d65d6ef97109caf8fbcf))
+* return shopify-api from shopify service ([abe20e0](https://github.com/shop3/strapi-plugin-shopify/commit/abe20e0088c0ddd3f2eab1bb04adb516a3b64108))
+
 ### [0.0.4](https://github.com/strapify/strapi-plugin-shopify/compare/v0.0.3...v0.0.4) (2022-07-06)
 
 ### [0.0.3](https://github.com/strapify/strapi-plugin-shopify/compare/v0.0.2...v0.0.3) (2022-06-27)
