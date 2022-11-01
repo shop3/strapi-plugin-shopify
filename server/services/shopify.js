@@ -4,6 +4,10 @@ const Shopify = require('@shopify/shopify-api').default;
 const { ApiVersion } = require('@shopify/shopify-api');
 
 module.exports = ({ strapi }) => ({
+  getShopify() {
+    return Shopify;
+  },
+
   getApiVersion() {
     return ApiVersion.January22;
   },
