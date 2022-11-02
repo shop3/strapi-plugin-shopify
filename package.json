@@ -50,8 +50,20 @@
     "prettier": "^2.7.1",
     "standard-version": "^9.5.0"
   },
+  "author": {
+    "name": "Shop3",
+    "email": "admin@shop3.dev",
+    "url": "https://shop3.dev"
+  },
+  "maintainers": [
+    {
+      "name": "Shop3",
+      "email": "admin@shop3.dev",
+      "url": "https://shop3.dev"
+    }
+  ],
   "engines": {
-    "node": ">=12.x.x <=16.x.x",
+    "node": ">=12.x.x <=18.x.x",
     "npm": ">=6.0.0"
   },
   "lint-staged": {
