@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/shop3/strapi-plugin-shopify/compare/v0.0.5...v0.0.6) (2022-11-02)
+
+
+### Features
+
+* added usage record price on db ([0b7f582](https://github.com/shop3/strapi-plugin-shopify/commit/0b7f5824481e2ef6937ae62de4ef9da43b912b43))
+
 ### [0.0.5](https://github.com/shop3/strapi-plugin-shopify/compare/v0.0.4...v0.0.5) (2022-11-01)
 
 
