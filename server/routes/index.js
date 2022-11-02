@@ -14,12 +14,6 @@ module.exports = {
   },
   'content-api': {
     type: 'content-api',
-    routes: [
-      ...authRoutes,
-      ...installRoutes,
-      ...shopRoutes,
-      ...shopifyRoutes,
-      ...billing['content-api'],
-    ],
+    routes: [...authRoutes, ...installRoutes, ...shopRoutes, ...shopifyRoutes, ...billing['content-api']],
   },
 };

@@ -7,9 +7,11 @@ const utils = require('./utils');
 
 const disableBilling = process.env.SHOPIFY_DISABLE_BILLING === 'true';
 
-module.exports = !disableBilling ? {
+const enabledExport = {
   plan: plan,
   subscription: subscription,
   'usage-record': usageRecord,
   'billing-utils': utils,
-} : {};
+};
+
+module.exports = !disableBilling ? enabledExport : {};

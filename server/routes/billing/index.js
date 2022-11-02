@@ -4,12 +4,14 @@ const subscriptionRoutes = require('./subscription');
 
 const disableBilling = process.env.SHOPIFY_DISABLE_BILLING === 'true';
 
-module.exports = !disableBilling ? {
-  'admin': [],
-  'content-api': [
-    ...subscriptionRoutes,
-  ],
-} : {
-  'admin': [],
+const enabledExport = {
+  admin: [],
+  'content-api': [...subscriptionRoutes],
+};
+
+const disabledExport = {
+  admin: [],
   'content-api': [],
 };
+
+module.exports = !disableBilling ? enabledExport : disabledExport;

@@ -52,7 +52,7 @@ module.exports = ({ strapi }) => ({
       trialDays: plan.trialDays,
       test: plan.test,
       planId: plan.id,
-    }
+    };
     // override trial days if a subscription already exists
     if (!_.isEmpty(existingSubscription.data) && !_.isNull(existingSubscription.data.trial_ends_on)) {
       const utilsService = strapi.service('plugin::shopify.billing-utils');
