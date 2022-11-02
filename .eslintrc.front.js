@@ -44,6 +44,6 @@ module.exports = {
     "import/first": "error",
     "import/extensions": ["error", "never", { "json": "always" }],
     "import/newline-after-import": "error",
-    "import/no-extraneous-dependencies": "error"
+    "import/no-extraneous-dependencies": "off"
   }
 }

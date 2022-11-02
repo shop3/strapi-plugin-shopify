@@ -32,11 +32,12 @@ module.exports = {
     "import/first": "error",
     "import/extensions": ["error", "never"],
     "import/newline-after-import": "error",
-    "import/no-extraneous-dependencies": "error",
+    "import/no-extraneous-dependencies": "off",
     "node/exports-style": ["error", "module.exports"],
     "node/no-new-require": "error",
     "node/no-path-concat": "error",
     "node/no-callback-literal": "error",
-    "node/handle-callback-err": "error"
+    "node/handle-callback-err": "error",
+    "node/no-extraneous-require": "off",
   }
 }

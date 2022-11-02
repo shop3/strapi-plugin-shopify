@@ -32,17 +32,7 @@
     "@shopify/shopify-api": "^5.2.0"
   },
   "peerDependencies": {
-    "@strapi/design-system": "^1.2.5",
-    "@strapi/helper-plugin": "^4.4.5",
-    "@strapi/strapi": "^4.4.5",
-    "@strapi/utils": "^4.4.5",
-    "axios": "^0.24.0",
-    "koa-body": "^4.2.0",
-    "prop-types": "^15.8.1",
-    "qs": "^6.11.0",
-    "react": "^17.0.2",
-    "react-intl": "^5.25.1",
-    "styled-components": "^5.3.6"
+    "@strapi/strapi": "^4.4.5"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
