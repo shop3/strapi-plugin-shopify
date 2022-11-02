@@ -11,6 +11,12 @@
     "draftAndPublish": false
   },
   "attributes": {
+    "price": {
+      "type": "decimal",
+      "required": true,
+      "min": 0,
+      "configurable": false
+    },
     "subscription": {
       "type": "relation",
       "relation": "manyToOne",
