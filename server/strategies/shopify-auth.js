@@ -52,8 +52,12 @@ const authenticate = async (ctx) => {
 
     // check if session has access token and is not expired
     if (session.accessToken && session.expires >= new Date()) {
-      // set shopify session in context state
-      ctx.state.shopify = session;
+      // get the shop service
+      const shopService = strapi.service('plugin::shopify.shop');
+      // load the shop from db
+      const shop = await shopService.findByDomain(session.shop);
+      // set shopify shop and session in context state
+      ctx.state.shopify = { shop, session };
       // return authenticated session
       return {
         authenticated: true,

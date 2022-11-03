@@ -1,13 +1,12 @@
 'use strict';
 
-const Shopify = require('@shopify/shopify-api').default;
 const _ = require('lodash');
 
 module.exports = ({ strapi }) => ({
   async create(ctx) {
     const { returnUrl } = ctx.query;
     // get shopify session
-    const { shop, accessToken } = await Shopify.Utils.loadCurrentSession(ctx.req, ctx.res, true);
+    const { shop, accessToken } = _.get(ctx, 'state.shopify.session');
     // get subscription service
     const subscriptionService = strapi.service('plugin::shopify.subscription');
     // find existing subscription
@@ -58,9 +57,6 @@ module.exports = ({ strapi }) => ({
       const utilsService = strapi.service('plugin::shopify.billing-utils');
       subscription.trialDays = utilsService.getRemainingTrialDays(existingSubscription.data.trial_ends_on);
     }
-    // set shop and access token
-    subscription.shop = shop;
-    subscription.accessToken = accessToken;
     // set return Url
     if (returnUrl) {
       subscription.returnUrl = returnUrl;
@@ -76,7 +72,7 @@ module.exports = ({ strapi }) => ({
   },
 
   async find(ctx) {
-    const session = ctx.state.shopify;
+    const session = _.get(ctx, 'state.shopify.session');
     const subscriptionService = strapi.service('plugin::shopify.subscription');
     const subscriptionDb = await subscriptionService.findByShop(session.shop);
     if (_.isEmpty(subscriptionDb.data)) return ctx.notFound();

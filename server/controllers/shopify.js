@@ -2,7 +2,7 @@
 
 const Shopify = require('@shopify/shopify-api').default;
 const { ShopifyHeader } = require('@shopify/shopify-api');
-const unparsed = require('koa-body/unparsed');
+const _ = require('lodash');
 
 module.exports = ({ strapi }) => ({
   async index(ctx) {
@@ -49,7 +49,7 @@ module.exports = ({ strapi }) => ({
   },
 
   async me(ctx) {
-    const session = await Shopify.Utils.loadCurrentSession(ctx.req, ctx.res, true);
+    const session = _.get(ctx, 'state.shopify.session');
     if (session) {
       ctx.send(session.onlineAccessInfo.associated_user);
     } else {

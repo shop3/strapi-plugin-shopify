@@ -15,11 +15,15 @@ module.exports = createCoreService('plugin::shopify.subscription', ({ strapi }) 
   },
 
   async create(params) {
-    const { planId, shop, accessToken, ...subscription } = params;
-    // get db shop
-    const shopDb = await strapi.service('plugin::shopify.shop').findByDomain(shop);
+    const { planId, ...subscription } = params;
+    // get strapi request context
+    const ctx = strapi.requestContext.get();
+    // get shop
+    const shop = _.get(ctx, 'state.shopify.shop');
+    // get shopify session
+    const session = _.get(ctx, 'state.shopify.session');
     // get graphql client
-    const client = new Shopify.Clients.Graphql(shop, accessToken);
+    const client = new Shopify.Clients.Graphql(session.shop, session.accessToken);
 
     // create subscription on Shopify
     const { confirmationUrl, subscriptionGid } = await appSubscriptionCreate(client, subscription);
@@ -37,19 +41,22 @@ module.exports = createCoreService('plugin::shopify.subscription', ({ strapi }) 
         trial_ends_on: trialEndsOn,
         confirmation_url: confirmationUrl,
         test: subscription.test,
-        shop: shopDb.id,
+        shop: shop.id,
         plan: planId,
       },
     });
     return confirmationUrl;
   },
 
-  async findOnShopify(id, params) {
-    const { shop, accessToken } = params;
+  async findOnShopify(id) {
+    // get strapi request context
+    const ctx = strapi.requestContext.get();
+    // get shopify session
+    const session = _.get(ctx, 'state.shopify.session');
     // get gid from numeric id
     const subscriptionGid = this.subscriptionIdToGid(id);
     // get graphql client
-    const client = new Shopify.Clients.Graphql(shop, accessToken);
+    const client = new Shopify.Clients.Graphql(session.shop, session.accessToken);
 
     // get subscription from Shopify
     const subscription = await appSubscriptionFind(client, subscriptionGid);

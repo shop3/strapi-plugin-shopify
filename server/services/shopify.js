@@ -2,6 +2,7 @@
 
 const Shopify = require('@shopify/shopify-api').default;
 const { ApiVersion } = require('@shopify/shopify-api');
+const _ = require('lodash');
 
 module.exports = ({ strapi }) => ({
   getShopify() {
@@ -63,8 +64,9 @@ module.exports = ({ strapi }) => ({
     }
   },
 
-  async getClientRest(ctx) {
-    const session = ctx.state.shopify || (await Shopify.Utils.loadCurrentSession(ctx.req, ctx.res));
+  async getClientRest() {
+    const ctx = strapi.requestContext.get();
+    const session = _.get(ctx, 'state.shopify.session');
     if (session) {
       const client = new Shopify.Clients.Rest(session.shop, session.accessToken);
       return client;
@@ -83,8 +85,9 @@ module.exports = ({ strapi }) => ({
     }
   },
 
-  async getClientGraphql(ctx) {
-    const session = ctx.state.shopify || (await Shopify.Utils.loadCurrentSession(ctx.req, ctx.res));
+  async getClientGraphql() {
+    const ctx = strapi.requestContext.get();
+    const session = _.get(ctx, 'state.shopify.session');
     if (session) {
       const client = new Shopify.Clients.Graphql(session.shop, session.accessToken);
       return client;
