@@ -1,6 +1,6 @@
-# Strapi plugin Shopify
+# Strapi Plugin Shopify
 
-Integrate Shopify in your Strapi application.
+Build a Shopify application with Strapi.
 
 ## Table Of Content
 
@@ -86,5 +86,7 @@ This are the endpoints exposed by this plugin:
 | GET | /api/shopify/install/callback | the installation callback endpoint, should be called only by Shopify |
 | GET | /api/shopify/auth | the authentication endpoint, should not be called directly, use /api/shopify instead |
 | GET | /api/shopify/auth/callback | the authentication callback endpoint, should be called only by Shopify |
+| POST | /api/shopify/auth/logout | the logout endpoint, should be called to delete the Shopify session |
 | GET | /api/shopify/shop | this endpoint should be called to get the authenticated shop data |
-
+| GET | /api/shopify/subscription | this endpoint should be called to get the shop subscription |
+| POST | /api/shopify/subscription | this endpoint should be called to create a shop subscription |
