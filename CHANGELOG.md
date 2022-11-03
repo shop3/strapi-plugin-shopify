@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://github.com/shop3/strapi-plugin-shopify/compare/v0.0.6...v0.1.0) (2022-11-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* added shop and session to ctx.state.shopify to reduce database calls
+
+### Features
+
+* added shop and session to ctx.state.shopify to reduce database calls ([e0a5e6a](https://github.com/shop3/strapi-plugin-shopify/commit/e0a5e6a43f46febaf69f5ea31573c05574bdd586))
+* cancel subscription after shop is uninstalled ([8d9e450](https://github.com/shop3/strapi-plugin-shopify/commit/8d9e4509ddfa039fa0ebe7e4a9238aa650b909f0))
+
 ### [0.0.6](https://github.com/shop3/strapi-plugin-shopify/compare/v0.0.5...v0.0.6) (2022-11-02)
 
 
