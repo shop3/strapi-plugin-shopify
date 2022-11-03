@@ -48,6 +48,14 @@ module.exports = createCoreService('plugin::shopify.subscription', ({ strapi }) 
     return confirmationUrl;
   },
 
+  async cancel(shop) {
+    const subscription = await this.findByShop(shop);
+    if (_.isEmpty(subscription.data)) {
+      return;
+    }
+    await super.update(subscription.data.id, { data: { status: 'CANCELLED' } });
+  },
+
   async findOnShopify(id) {
     // get strapi request context
     const ctx = strapi.requestContext.get();

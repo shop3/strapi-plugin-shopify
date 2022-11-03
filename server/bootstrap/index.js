@@ -2,6 +2,8 @@
 
 const { actions } = require('./actions');
 
+const disableBilling = process.env.SHOPIFY_DISABLE_BILLING === 'true';
+
 module.exports = async ({ strapi }) => {
   // add plugin actions
   const permissionService = strapi.service('admin::permission');
@@ -10,4 +12,9 @@ module.exports = async ({ strapi }) => {
   const shopifyService = strapi.service('plugin::shopify.shopify');
   shopifyService.initializeContext();
   shopifyService.initializeWebhooks();
+  // initialize shopify billing
+  if (!disableBilling) {
+    const billingInitService = strapi.service('plugin::shopify.billing-init');
+    billingInitService.initialize();
+  }
 };
