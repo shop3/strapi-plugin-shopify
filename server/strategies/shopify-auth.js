@@ -11,6 +11,7 @@ const handleRedirectInstall = (ctx, shop, error) => {
 };
 
 const handleRedirectAuth = (ctx, shop, error) => {
+  strapi.log.warn(`Redirect shop ${shop}: ${error}`);
   return handleRedirect(ctx, shop, 'auth', error);
 };
 
@@ -42,7 +43,16 @@ const authenticate = async (ctx) => {
       await Shopify.Utils.deleteCurrentSession(ctx.req, ctx.res, true);
       return handleRedirectAuth(ctx, query.shop, 'Different shop in query string');
     }
-
+    // check if session has access token
+    if (!session.accessToken) {
+      await Shopify.Utils.deleteCurrentSession(ctx.req, ctx.res, true);
+      return handleRedirectAuth(ctx, session.shop, 'Missing access token');
+    }
+    // check if session has expired
+    if (session.expires < new Date()) {
+      await Shopify.Utils.deleteCurrentSession(ctx.req, ctx.res, true);
+      return handleRedirectAuth(ctx, session.shop, 'Session expired');
+    }
     // check if scope has changed
     const scopesChanged = !Shopify.Context.SCOPES.equals(session.scope);
     if (scopesChanged) {
@@ -50,25 +60,17 @@ const authenticate = async (ctx) => {
       return handleRedirectInstall(ctx, session.shop, 'Session scope has changed');
     }
 
-    // check if session has access token and is not expired
-    if (session.accessToken && session.expires >= new Date()) {
-      // get the shop service
-      const shopService = strapi.service('plugin::shopify.shop');
-      // load the shop from db
-      const shop = await shopService.findByDomain(session.shop);
-      // set shopify shop and session in context state
-      ctx.state.shopify = { shop, session };
-      // return authenticated session
-      return {
-        authenticated: true,
-        credentials: session,
-      };
-    } else {
-      // session has not access token or is expired
-      await Shopify.Utils.deleteCurrentSession(ctx.req, ctx.res, true);
-      const error = session.accessToken ? 'Missing access token' : 'Session expired';
-      return handleRedirectAuth(ctx, session.shop, error);
-    }
+    // get the shop service
+    const shopService = strapi.service('plugin::shopify.shop');
+    // load the shop from db
+    const shop = await shopService.findByDomain(session.shop);
+    // set shopify shop and session in context state
+    ctx.state.shopify = { shop, session };
+    // return authenticated session
+    return {
+      authenticated: true,
+      credentials: session,
+    };
   } catch (err) {
     // return not authenticated
     return {
