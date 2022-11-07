@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/shop3/strapi-plugin-shopify/compare/v0.1.0...v0.1.1) (2022-11-07)
+
+
+### Features
+
+* added plan routes and controller ([b7f98b6](https://github.com/shop3/strapi-plugin-shopify/commit/b7f98b60db03ce0537d7ac3a517ba7a9057f1470))
+* handle redirect on the entrypoint ([9c73e25](https://github.com/shop3/strapi-plugin-shopify/commit/9c73e2513f82fdb1e089878ac20230295c7a720c))
+
+
+### Bug Fixes
+
+* fixed plan not found ([e288ace](https://github.com/shop3/strapi-plugin-shopify/commit/e288ace5c7d1a529583b944d27dab3e7c508955c))
+
 ## [0.1.0](https://github.com/shop3/strapi-plugin-shopify/compare/v0.0.6...v0.1.0) (2022-11-03)
 
 
