@@ -35,7 +35,7 @@ module.exports = ({ strapi }) => ({
     const planService = strapi.service('plugin::shopify.plan');
     // get plan
     const plan = await planService.findOne(planId);
-    if (_.isUndefined(plan)) return ctx.badRequest('Plan not found');
+    if (_.isNull(plan)) return ctx.badRequest('Plan not found');
     // create subscription
     const subscription = {
       name: plan.name,
