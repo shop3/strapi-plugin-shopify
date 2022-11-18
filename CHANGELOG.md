@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/shop3/strapi-plugin-shopify/compare/v0.1.1...v0.1.2) (2022-11-18)
+
+
+### Bug Fixes
+
+* fixed find subscription by shop ([8f758cd](https://github.com/shop3/strapi-plugin-shopify/commit/8f758cd08bcb806c03ec0f2912376bca11f2a569))
+
 ### [0.1.1](https://github.com/shop3/strapi-plugin-shopify/compare/v0.1.0...v0.1.1) (2022-11-07)
 
 
