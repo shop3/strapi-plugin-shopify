@@ -75,8 +75,8 @@ module.exports = createCoreService('plugin::shopify.subscription', ({ strapi }) 
   },
 
   async findByShop(shop) {
-    const { results } = await this.find({
-      where: { shop: { domain: { $eq: shop } } },
+    const { results } = await super.find({
+      filters: { shop: { domain: { $eq: shop } } },
       sort: 'id:desc',
     });
     return {
