@@ -21,7 +21,14 @@ module.exports = () => ({
   },
 });
 
-const actions = ['beforeInstall', 'afterInstall', 'beforeUninstall', 'afterUninstall'];
+const actions = [
+  'beforeInstall',
+  'afterInstall',
+  'beforeUninstall',
+  'afterUninstall',
+  'beforeSubscribe',
+  'afterSubscribe',
+];
 
 function isValidAction(action) {
   return actions.includes(action);
