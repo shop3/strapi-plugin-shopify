@@ -5,6 +5,7 @@ const { validateConfig } = require('../validation');
 module.exports = {
   default: ({ env }) => ({
     hostName: env('HOST_NAME'),
+    apiVersion: env('SHOPIFY_API_VERSION'),
     apiKey: env('SHOPIFY_API_KEY'),
     apiSecret: env('SHOPIFY_API_SECRET'),
     scopes: env.array('SHOPIFY_SCOPES', []),

@@ -10,7 +10,15 @@ module.exports = ({ strapi }) => ({
   },
 
   getApiVersion() {
-    return ApiVersion.January22;
+    let apiVersion = strapi.config.get('plugin.shopify.apiVersion');
+    if (!apiVersion) {
+      const versions = Object.values(ApiVersion)
+        .filter((v) => v !== 'unstable')
+        .sort((a, b) => b.localeCompare(a));
+      apiVersion = versions[0];
+      strapi.log.info(`Using default Shopify API version: ${apiVersion}`);
+    }
+    return apiVersion;
   },
 
   initializeContext() {
