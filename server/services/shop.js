@@ -32,7 +32,7 @@ module.exports = createCoreService('plugin::shopify.shop', ({ strapi }) => ({
     let id, shop, props, token;
     if (typeof args[0] === 'string' && typeof args[1] === 'string') {
       [shop, token] = args;
-    } else if (typeof args[0] === 'number' && typeof args[1] === 'object') {
+    } else if ((typeof args[0] === 'number' || typeof args[0] === 'string') && typeof args[1] === 'object') {
       [id, props, token] = args;
       shop = props.domain;
     }
