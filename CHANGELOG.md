@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/shop3/strapi-plugin-shopify/compare/v0.2.0...v0.2.1) (2023-01-04)
+
+
+### Bug Fixes
+
+* shop update works with big integers ([d49d40c](https://github.com/shop3/strapi-plugin-shopify/commit/d49d40cd857e5c421c91d5d381655bb572806cc4))
+
 ## [0.2.0](https://github.com/shop3/strapi-plugin-shopify/compare/v0.1.3...v0.2.0) (2022-12-11)
 
 
