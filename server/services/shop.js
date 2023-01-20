@@ -92,4 +92,8 @@ module.exports = createCoreService('plugin::shopify.shop', ({ strapi }) => ({
       strapi.log.error(`Failed to check if is installed ${shop} - ${e.message}`);
     }
   },
+  async deleteByDomain(domain) {
+    const shopDb = await strapi.db.query('plugin::shopify.shop').delete({ where: { domain: shop } });
+    return shopDb;
+  }
 }));
