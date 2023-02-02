@@ -1,0 +1,45 @@
+.container {
+  box-sizing: border-box;
+  background: #fff;
+}
+.header {
+  padding: 24px;
+  box-sizing: border-box;
+  display: block;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.main {
+  grid-template-columns: repeat(auto-fit,minmax(0,1fr));
+  display: grid;
+  grid-gap: 23px;
+  font: inherit;
+  vertical-align: baseline;
+  padding: 30px;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+}
+.modal-container {
+  background-color: rgba(0,0,0,.75);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  height: 100vh;
+  width: 100vw;
+  display: block;
+}
+.modal-body {
+  width: 744px;
+  max-height: calc(100vh - 96px);
+  overflow: visible;
+  background-color: var(--color-background-container)!important;
+  border-radius: var(--corner-radius-medium)!important;
+  transition: box-shadow 83ms;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
