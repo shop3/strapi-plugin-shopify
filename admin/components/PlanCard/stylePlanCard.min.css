@@ -7,7 +7,7 @@
   padding: 24px 10px 40px;
   box-sizing: border-box;
   text-align: center;
-  width: 100%;
+  width: 31%;
 }
 .title {
   font-weight: 600;
@@ -100,4 +100,12 @@
   vertical-align: middle;
   margin-left: 16px;
   font-weight: 500;
+}
+.Button-area {
+  margin-top: 32px;
+  padding-left: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-end;
+  grid-gap: 10px;
 }
