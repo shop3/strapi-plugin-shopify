@@ -2,11 +2,11 @@ import axiosInstance from '../utils/axiosInstance';
 
 const plansRequests = {
   getPlans: async () => {
-    const data = await axiosInstance.get('/api/shopify/plans');
+    const data = await axiosInstance.get('/shopify/plans');
     return data;
   },
   createPlans: async ( data ) => {
-    const plans = await axiosInstance.post(`/api/shopify/plans/create`, JSON.stringify(data));
+    const plans = await axiosInstance.post(`/shopify/plans/create`, JSON.stringify(data));
     return plans;
   },
   editPlans: async ( data, id ) => {
@@ -14,14 +14,14 @@ const plansRequests = {
       "id": id,
       "data": data,
     }
-    const plans = await axiosInstance.put(`/api/shopify/plans/edit`, JSON.stringify(datas));
+    const plans = await axiosInstance.put(`/shopify/plans/edit`, JSON.stringify(datas));
     return plans;
   },
   deletePlans: async ( id ) => {
     const data = {
       "id": id,
     }
-    const plans = await axiosInstance.post(`/api/shopify/plans/delete`, JSON.stringify(data));
+    const plans = await axiosInstance.post(`/shopify/plans/delete`, JSON.stringify(data));
     return plans;
   }
 };

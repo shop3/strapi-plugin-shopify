@@ -6,6 +6,7 @@ const _ = require('lodash');
 module.exports = createCoreController('plugin::shopify.plan', ({ strapi }) => ({
   find: async (ctx) => {
     const planData = await strapi.service('plugin::shopify.plan').findPlans();
+    console.log(ctx);
     ctx.status = 200;
     ctx.send(planData);
   },

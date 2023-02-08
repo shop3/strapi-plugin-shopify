@@ -9,5 +9,12 @@ module.exports = {
       subCategory: 'settings',
       pluginName: 'shopify',
     },
+    {
+      section: 'plugins',
+      displayName: 'Read',
+      uid: 'plan.read',
+      subCategory: 'plan',
+      pluginName: 'shopify',
+    },
   ],
 };

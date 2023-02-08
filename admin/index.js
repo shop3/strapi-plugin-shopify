@@ -20,7 +20,12 @@ export default {
 
         return component;
       },
-      permissions: [],
+      permissions: [
+        {
+          action: 'plugin::shopify.plan.read',
+          subject: null,
+        },
+      ],
     });
     app.createSettingSection(
       {
@@ -53,7 +58,7 @@ export default {
     app.registerPlugin({
       id: pluginId,
       initializer: Initializer,
-      isReady: false,
+      isReady: true,
       name,
     });
   },
