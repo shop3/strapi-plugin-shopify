@@ -10,18 +10,14 @@ const plansRequests = {
     return plans;
   },
   editPlans: async ( data, id ) => {
-    const datas = {
+    const plans = await axiosInstance.put(`/shopify/plans/edit`, JSON.stringify({
       "id": id,
       "data": data,
-    }
-    const plans = await axiosInstance.put(`/shopify/plans/edit`, JSON.stringify(datas));
+    }));
     return plans;
   },
   deletePlans: async ( id ) => {
-    const data = {
-      "id": id,
-    }
-    const plans = await axiosInstance.post(`/shopify/plans/delete`, JSON.stringify(data));
+    const plans = await axiosInstance.post(`/shopify/plans/delete`, JSON.stringify({ "id": id }));
     return plans;
   }
 };

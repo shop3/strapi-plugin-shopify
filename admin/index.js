@@ -25,6 +25,10 @@ export default {
           action: 'plugin::shopify.plan.read',
           subject: null,
         },
+        {
+          action: 'plugin::shopify.plan.write',
+          subject: null,
+        },
       ],
     });
     app.createSettingSection(

@@ -28,7 +28,7 @@ module.exports = {
           {
             name: 'admin::hasPermissions',
             config: {
-              actions: ['plugin::shopify.plan.read'],
+              actions: ['plugin::shopify.plan.write'],
             },
           },
         ],
@@ -44,7 +44,7 @@ module.exports = {
           {
             name: 'admin::hasPermissions',
             config: {
-              actions: ['plugin::shopify.plan.read'],
+              actions: ['plugin::shopify.plan.write'],
             },
           },
         ],
@@ -60,12 +60,22 @@ module.exports = {
           {
             name: 'admin::hasPermissions',
             config: {
-              actions: ['plugin::shopify.plan.read'],
+              actions: ['plugin::shopify.plan.write'],
             },
           },
         ],
       },
     },
   ],
-  'content-api': []
+  'content-api': [
+    {
+      method: 'GET',
+      path: '/shopify/plans',
+      handler: 'plan.find',
+      config: {
+        prefix: '',
+        policies: ['plugin::shopify.is-authenticated'],
+      },
+    },
+  ]
 };

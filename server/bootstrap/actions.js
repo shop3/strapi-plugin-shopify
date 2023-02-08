@@ -16,5 +16,12 @@ module.exports = {
       subCategory: 'plan',
       pluginName: 'shopify',
     },
+    {
+      section: 'plugins',
+      displayName: 'Write',
+      uid: 'plan.write',
+      subCategory: 'plan',
+      pluginName: 'shopify',
+    },
   ],
 };
