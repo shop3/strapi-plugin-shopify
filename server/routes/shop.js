@@ -10,4 +10,14 @@ module.exports = [
       policies: ['plugin::shopify.is-authenticated'],
     },
   },
+  {
+    method: 'POST',
+    path: '/shopify/webhooks/gdpr/shop/redact',
+    handler: 'shop.delete',
+    config: {
+      auth: false,
+      prefix: '',
+      policies: ['plugin::shopify.valid-body-hmac'],
+    },
+  },
 ];

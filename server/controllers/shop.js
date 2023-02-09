@@ -9,4 +9,10 @@ module.exports = createCoreController('plugin::shopify.shop', ({ strapi }) => ({
     const shopData = await strapi.service('plugin::shopify.shop').findByDomain(session.shop);
     ctx.send(shopData);
   },
+  delete: async (ctx) => {
+    const domain = _.get(ctx, 'request.body.domain');;
+    const shopData = await strapi.service('plugin::shopify.shop').deleteByDomain(domain);
+    ctx.status = 200;
+    ctx.send(shopData);
+  },
 }));
