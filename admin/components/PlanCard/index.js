@@ -1,9 +1,8 @@
 import React from 'react';
-import { Box, Button, Typography } from '@strapi/design-system';
+import { Box, Button, Typography, Flex } from '@strapi/design-system';
 import Info from '@strapi/icons/Information';
 import CheckCircle from '@strapi/icons/CheckCircle';
 import plansApi from '../../api/plans';
-import './stylePlanCard.min.css';
 
 const PlanCard = ( {data, setIsOpen, setItem} ) => {
 
@@ -18,37 +17,39 @@ const PlanCard = ( {data, setIsOpen, setItem} ) => {
   }
 
   return (
-    <div className="planCard">
-      <Typography className="title" variant="alpha" style={{ color: "#8c4bff" }}>{data.name}</Typography>
-      <Box className="card">
-        <Typography className="price">{data.recurringPrice+data.currencyCode}</Typography>
-        <Box className="subSection">
-          <Typography style={{ fontSize: "13px"}}>{data.recurringInterval}</Typography>
-          <Info style={{ color: "#b6b4ff" }} />
+    <Box paddingTop="40px" paddingLeft="15px" paddingBottom="20px" paddingRight="15px" hasRadius={true} background="secondary100" width="32%">
+      <Flex direction="column" alignItems="normal">
+        <Typography textTransform="uppercase" textAlign="center" variant="alpha" textColor="alternative600">{data.name}</Typography>
+        <Box height="300px" width="100%" marginTop={4} background="neutral0" hasRadius={true} padding={7}>
+          <Flex direction="column" justifyContent="flex-end">
+            <Typography textColor="buttonPrimary600" textAlign="center" variant="alpha" style={{ fontSize: "43px"}}>{data.recurringPrice+data.currencyCode}</Typography>
+            <Box marginTop={6} marginBottom={5} >
+              <Flex justifyContent="center" gap={2}>
+                <Typography style={{ fontSize: "13px"}}>{data.recurringInterval}</Typography>
+                <Info style={{ color: "#b6b4ff" }} />
+              </Flex>
+            </Box>
+            <Button  fullWidth size="L"  style={{ backgroundColor: "#8c4bff" }}>Buy now</Button>
+            <Typography variant="epsilon" textColor="alternative600" style={{ margin: "13px"}}>Free Enterprise Edition trial: {data.trialDays}</Typography>
+          </Flex>
         </Box>
-        <div className="button">
-          <div style={{ display: "block"}}>
-            <div style={{ backgroundColor: "#8c4bff", color: "#fff" }}>
-              <Typography className="button-typo">Buy now</Typography>
-            </div>
-          </div>
-        </div>
-        <Typography className="trial" style={{ color: "#8c4bff" }}>Free Enterprise Edition trial: {data.trialDays}</Typography>
-      </Box>
-      <Box className="footer">
-        <Typography className="footer-title" style={{ color: "#8c4bff"}}>usageCappedAmount: {data.usageCappedAmount}</Typography>
-        <Box className="footer-content">
-          <Box className="footer-content-box">
-            <CheckCircle />
-            <Typography className="footer-content-item">{data.usageTerms}</Typography>
+        <Box textAlign="left" marginTop="32px" paddingLeft="14px">
+          <Typography variant="delta" textTransform="uppercase" textColor="alternative600">usageCappedAmount: {data.usageCappedAmount}</Typography>
+          <Box marginTop="17px" marginBottom="17px">
+            <Flex alignItems="center">
+              <CheckCircle />
+              <Typography variant="omega" fontWeight="semiBold" style={{ marginLeft: "16px" }}>{data.usageTerms}</Typography>
+            </Flex>
           </Box>
         </Box>
-      </Box>
-      <Box className="Button-area">
-        <Button onClick={() => handleEdit()}>Edit</Button>
-        <Button onClick={() => handleDelete()}>Delete</Button>
-      </Box>
-    </div>
+        <Box marginTop="32px" paddingLeft="14px">
+          <Flex flexWrap="wrap" gap="10px" justifyContent="flex-end">
+            <Button onClick={() => handleEdit()}>Edit</Button>
+            <Button onClick={() => handleDelete()}>Delete</Button>
+          </Flex>
+        </Box>
+      </Flex>
+    </Box>
   );
 };
 

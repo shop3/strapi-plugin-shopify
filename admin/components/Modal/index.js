@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Select, Option, Textarea, TextInput, NumberInput, Box, ToggleInput } from '@strapi/design-system';
+import { Typography, Grid, GridItem, Flex, Button, Select, Option, Textarea, TextInput, NumberInput, Box, ToggleInput } from '@strapi/design-system';
 import plansApi from '../../api/plans';
-import styles from "./modal.min.css";
 
 const Modal = ({ setIsOpen, setStatus, setItem, item }) => {
 
@@ -40,65 +39,71 @@ const Modal = ({ setIsOpen, setStatus, setItem, item }) => {
 
     setIsOpen(false)
   }
+
   return (
     <>
-      <Box className="darkBG" onClick={() => setIsOpen(false)} />
-      <Box className={"centered"}>
-        <Box className={"modal"}>
-          <Box className={"modalHeader"}>
-            {item.id==='' ? (<h5 className={"heading"}>Create Plan</h5>) : (<h5 className={"heading"}>Edit Plan</h5>)}
+      <Box position="absolute" top="50%" left="50%" width="100vw" height="100vh" style={{transform: "translate(-50%, -50%)", background: "rgba(0, 0, 0, 0.5)"}} onClick={() => setIsOpen(false)} />
+      <Box position="fixed" top="50%" left="60%" style={{transform: "translate(-50%, -50%)"}}>
+        <Box width="800px" height="600px" background="neutral0" color="neutral0" padding="20px" hasRadius={true}>
+          <Box height="50px" background="neutral0" textAlign="center" padding="10px">
+            {item.id==='' ? (<Typography variant="beta">Create Plan</Typography>) : (<Typography variant="beta">Edit Plan</Typography>)}
           </Box>
-          <Box className={"modalContent"}>
-            <Box className={"modalContentRow"}>
-              <Box className={"modalItem"}>
-                <TextInput label="Name" onChange={e => setName(e.target.value)} value={name} required />
-              </Box>
-              <Box className={"modalItem"}>
-                <NumberInput label="recurringPrice" hint="min. 0 characters" step={0.01} onValueChange={value => setRecurringPrice(value)} value={recurringPrice} required />
-              </Box>
+          <Box>
+            <Box marginBottom="30px">
+              <Grid gap="16px" >
+                <GridItem  col={6}>
+                  <TextInput label="Name" onChange={e => setName(e.target.value)} value={name} required />
+                </GridItem>
+                <GridItem  col={6}>
+                  <NumberInput label="recurringPrice" hint="min. 0 characters" step={0.01} onValueChange={value => setRecurringPrice(value)} value={recurringPrice} required />
+                </GridItem>
+              </Grid>
             </Box>
-            <Box className={"modalContentRow"}>
-              <Box className={"modalItem"}>
-                <Select label="recurringInterval" value={recurringInterval} onChange={setRecurringInterval}  required >
-                  <Option value="EVERY_30_DAYS">EVERY_30_DAYS</Option>
-                  <Option value="ANNUAL">ANNUAL</Option>
-                </Select>
-              </Box>
-              <Box className={"modalItem"}>
-                <Textarea label="usageTerms" onChange={e => setUsageTerms(e.target.value)} value={usageTerms} required />
-              </Box>
+            <Box marginBottom="30px">
+              <Grid gap="16px" >
+                <GridItem  col={6}>
+                  <Select label="recurringInterval" value={recurringInterval} onChange={setRecurringInterval}  required >
+                    <Option value="EVERY_30_DAYS">EVERY_30_DAYS</Option>
+                    <Option value="ANNUAL">ANNUAL</Option>
+                  </Select>
+                </GridItem>
+                <GridItem  col={6}>
+                  <Textarea label="usageTerms" onChange={e => setUsageTerms(e.target.value)} value={usageTerms} required />
+                </GridItem>
+              </Grid>
             </Box>
-            <Box className={"modalContentRow"}>
-              <Box className={"modalItem"}>
-                <NumberInput label="usageCappedAmount" hint="min. 0 characters" step={0.01} onValueChange={value => setUsageCappedAmount(value)} value={usageCappedAmount} required />
-              </Box>
-              <Box className={"modalItem"}>
-                <Select label="currencyCode" value={currencyCode} onChange={setCurrencyCode}  required >
-                  <Option value="USD">USD</Option>
-                </Select>
-              </Box>
+            <Box marginBottom="30px">
+              <Grid gap="16px" >
+                <GridItem  col={6}>
+                  <NumberInput label="usageCappedAmount" hint="min. 0 characters" step={0.01} onValueChange={value => setUsageCappedAmount(value)} value={usageCappedAmount} required />
+                </GridItem>
+                <GridItem  col={6}>
+                  <Select label="currencyCode" value={currencyCode} onChange={setCurrencyCode}  required >
+                    <Option value="USD">USD</Option>
+                  </Select>
+                </GridItem>
+              </Grid>
             </Box>
-            <Box className={"modalContentRow"}>
-              <Box className={"modalItem"}>
-                <NumberInput label="trialDays" hint="min. 0" onValueChange={value => setTrialDays(value)} value={trialDays} required />
-              </Box>
-              <Box className={"modalItem"}>
-                <ToggleInput label="test" onLabel="True" offLabel="False" checked={test} onChange={e => setTest(e.target.checked)} />
-              </Box>
+            <Box marginBottom="30px">
+              <Grid gap="16px" >
+                <GridItem  col={6}>
+                  <NumberInput label="trialDays" hint="min. 0" onValueChange={value => setTrialDays(value)} value={trialDays} required />
+                </GridItem>
+                <GridItem  col={6}>
+                  <ToggleInput label="test" onLabel="True" offLabel="False" checked={test} onChange={e => setTest(e.target.checked)} />
+                </GridItem>
+              </Grid>
             </Box>
           </Box>
-          <Box className={"modalActions"}>
-            <Box className={"actionsContainer"}>
-              <button className={"btn"} onClick={() => handleSave()}>
+          <Box position="absolute" bottom="2px" padding="10px" marginBottom="20px" width="100%">
+            <Flex justifyContent="space-around" alignItems="center" >
+              <Button variant='tertiary' onClick={() => handleSave()}>
                 save
-              </button>
-              <button
-                className={"btn"}
-                onClick={() => setIsOpen(false)}
-              >
+              </Button>
+              <Button variant='tertiary' onClick={() => setIsOpen(false)}>
                 Cancel
-              </button>
-            </Box>
+              </Button>
+            </Flex>
           </Box>
         </Box>
       </Box>
