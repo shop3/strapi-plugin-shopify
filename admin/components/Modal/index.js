@@ -1,28 +1,58 @@
 import React, { useState } from "react";
 import { Select, Option, Textarea, TextInput, NumberInput, Box, ToggleInput } from '@strapi/design-system';
+import plansApi from '../../api/plans';
 import styles from "./modal.min.css";
 
-const Modal = ({ setIsOpen }) => {
-  const [recurringPrice, setRecurringPrice] = useState();
-  const [recurringInterval, setRecurringInterval] = useState();
-  const [usageTerms, setUsageTerms] = useState();
-  const [usageCappedAmount, setUsageCappedAmount] = useState();
-  const [currencyCode, setCurrencyCode] = useState();
-  const [trialDays, setTrialDays] = useState();
-  const [test, setTest] = useState();
+const Modal = ({ setIsOpen, setStatus, setItem, item }) => {
 
+  const [name, setName] = useState(item.name);
+  const [recurringPrice, setRecurringPrice] = useState(item.recurringPrice);
+  const [recurringInterval, setRecurringInterval] = useState(item.recurringInterval);
+  const [usageTerms, setUsageTerms] = useState(item.usageTerms);
+  const [usageCappedAmount, setUsageCappedAmount] = useState(item.usageCappedAmount);
+  const [currencyCode, setCurrencyCode] = useState(item.currencyCode);
+  const [trialDays, setTrialDays] = useState(item.trialDays);
+  const [test, setTest] = useState(item.test);
+
+  const handleSave = async () => {
+    const id = item.id
+    const data = {
+      "name" : name,
+      "recurringPrice" : recurringPrice,
+      "recurringInterval" : recurringInterval,
+      "usageTerms" : usageTerms,
+      "usageCappedAmount" : usageCappedAmount,
+      "currencyCode" : currencyCode,
+      "trialDays" : trialDays,
+      "test" : test
+    }
+
+    if(id==='') {
+      await plansApi.createPlans( data ).then((res) => {
+        setItem(res.data.plan);
+      });
+    }
+    else {
+      await plansApi.editPlans( data, id ).then((res) => {
+        setItem(res.data.plan);
+      });
+    }
+
+    setIsOpen(false)
+  }
+  
   return (
     <>
       <Box className="darkBG" onClick={() => setIsOpen(false)} />
       <Box className={"centered"}>
         <Box className={"modal"}>
           <Box className={"modalHeader"}>
-            <h5 className={"heading"}>Create Plan</h5>
+            {item.id==='' ? (<h5 className={"heading"}>Create Plan</h5>) : (<h5 className={"heading"}>Edit Plan</h5>)}
           </Box>
           <Box className={"modalContent"}>
             <Box className={"modalContentRow"}>
               <Box className={"modalItem"}>
-                <TextInput label="Name" required />
+                <TextInput label="Name" onChange={e => setName(e.target.value)} value={name} required />
               </Box>
               <Box className={"modalItem"}>
                 <NumberInput label="recurringPrice" hint="min. 0 characters" step={0.01} onValueChange={value => setRecurringPrice(value)} value={recurringPrice} required />
@@ -36,7 +66,7 @@ const Modal = ({ setIsOpen }) => {
                 </Select>
               </Box>
               <Box className={"modalItem"}>
-                <Textarea label="usageTerms" step={0.01} onValueChange={e => setUsageTerms(e.target.value)} value={usageTerms} required />
+                <Textarea label="usageTerms" onChange={e => setUsageTerms(e.target.value)} value={usageTerms} required />
               </Box>
             </Box>
             <Box className={"modalContentRow"}>
@@ -60,7 +90,7 @@ const Modal = ({ setIsOpen }) => {
           </Box>
           <Box className={"modalActions"}>
             <Box className={"actionsContainer"}>
-              <button className={"btn"} onClick={() => setIsOpen(false)}>
+              <button className={"btn"} onClick={() => handleSave()}>
                 save
               </button>
               <button
