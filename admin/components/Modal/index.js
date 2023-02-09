@@ -40,7 +40,7 @@ const Modal = ({ setIsOpen, setStatus, setItem, item }) => {
 
     setIsOpen(false)
   }
-
+  
   return (
     <>
       <Box className="darkBG" onClick={() => setIsOpen(false)} />
