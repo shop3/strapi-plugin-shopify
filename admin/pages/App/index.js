@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import PlanCard from '../../components/PlanCard';
-import { Box } from '@strapi/design-system/Box';
-import './app.min.css';
+import { Box, Flex } from '@strapi/design-system';
 import { Typography } from '@strapi/design-system/Typography';
 import { Button } from '@strapi/design-system/Button';
 import Modal from "../../components/Modal";
@@ -44,15 +43,19 @@ const App = () => {
     setIsOpen(true)
   }
   return (
-    <Box className="container">
-      <Box className="header">
-        <Typography style={{ fontWeight: 600, fontSize: "2rem", lineHeight: 1.25 }}>PLAN</Typography>
-        <Button size="L" onClick={() => handleCreate()} >+Create new plan</Button>
+    <Box background="neutral0">
+      <Box padding={5} >
+        <Flex justifyContent='space-between'>
+          <Typography variant="alpha">PLAN</Typography>
+          <Button size="L" onClick={() => handleCreate()} >+Create new plan</Button>
+        </Flex>
       </Box>
-      <Box className={"main"}>
-        {plans.map((plan) => (
-          <PlanCard data={plan} setIsOpen={setIsOpen} setItem={setItem}/>
-        ))}
+      <Box padding={4} >
+        <Flex wrap='wrap' gap={5} >
+          {plans.map((plan) => (
+            <PlanCard data={plan} setIsOpen={setIsOpen} setItem={setItem}/>
+          ))}
+        </Flex>
       </Box>
 
       {isOpen && <Modal setIsOpen={setIsOpen} setStatus={setStatus} setItem={setItem} item={item} />}
