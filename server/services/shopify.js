@@ -16,8 +16,8 @@ module.exports = ({ strapi }) => ({
         .filter((v) => v !== 'unstable')
         .sort((a, b) => b.localeCompare(a));
       apiVersion = versions[0];
-      strapi.log.info(`Using default Shopify API version: ${apiVersion}`);
     }
+    strapi.log.info(`Shopify API version: ${apiVersion}`);
     return apiVersion;
   },
 
