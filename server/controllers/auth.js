@@ -20,14 +20,29 @@ module.exports = ({ strapi }) => ({
   },
 
   async callback(ctx) {
-    const { query } = ctx;
-    const { shop, host } = query;
-    // validate authentication callback
-    await Shopify.Auth.validateAuthCallback(ctx.req, ctx.res, query);
-    // redirect to app url
-    const redirectUrl = strapi.config.get('plugin.shopify.redirectUrl');
-    const utils = strapi.service('plugin::shopify.utils');
-    ctx.redirect(`${redirectUrl}?${utils.generateQuery({ shop, host })}`);
+    try {
+      const { query } = ctx;
+      const { shop, host } = query;
+      // validate authentication callback
+      await Shopify.Auth.validateAuthCallback(ctx.req, ctx.res, query);
+      // redirect to app url
+      const redirectUrl = strapi.config.get('plugin.shopify.redirectUrl');
+      const utils = strapi.service('plugin::shopify.utils');
+      ctx.redirect(`${redirectUrl}?${utils.generateQuery({ shop, host })}`);
+    } catch (e) {
+      switch (true) {
+        case e instanceof Shopify.Errors.CookieNotFound:
+        case e instanceof Shopify.Errors.SessionNotFound:
+          const utils = strapi.service('plugin::shopify.utils');
+          ctx.redirect(`/api/shopify/auth?${utils.generateQuery({ shop })}`);
+          return;
+        case e instanceof Shopify.Errors.ShopifyError:
+          ctx.throw(500, e.message);
+          return;
+        default:
+          ctx.throw(500, `Failed to complete OAuth authentication process: ${e.message}`);
+      }
+    }
   },
 
   async logout(ctx) {
