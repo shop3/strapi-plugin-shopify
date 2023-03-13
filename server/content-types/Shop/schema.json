@@ -14,6 +14,12 @@
     "populateCreatorFields": false
   },
   "attributes": {
+    "shopify_id": {
+      "type": "biginteger",
+      "required": true,
+      "unique": true,
+      "configurable": false
+    },
     "domain": {
       "type": "string",
       "required": true,
