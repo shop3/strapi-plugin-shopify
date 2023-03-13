@@ -77,7 +77,7 @@ module.exports = ({ strapi }) => ({
     const subscriptionDb = await subscriptionService.findByShop(session.shop);
     if (_.isEmpty(subscriptionDb.data)) return ctx.notFound();
     if (subscriptionDb.data.status !== 'ACTIVE') return ctx.notFound();
-    const subscriptionShopify = await subscriptionService.findOnShopify(subscriptionDb.data.id, session);
+    const subscriptionShopify = await subscriptionService.findOnShopify(subscriptionDb.data.shopify_id, session);
     ctx.body = {
       ...subscriptionDb,
       shopify: subscriptionShopify,
