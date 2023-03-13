@@ -21,8 +21,9 @@ module.exports = createCoreService('plugin::shopify.shop', ({ strapi }) => ({
       // get shop data
       const client = new Shopify.Clients.Rest(shop, token);
       const response = await client.get({ path: 'shop' });
+      const { id: shopify_id, ...shopData } = response.body.shop;
       // assing shop
-      props = { ...response.body.shop, ...props };
+      props = { ...shopData, shopify_id, ...props }
     }
     // create shop
     return strapi.db.query('plugin::shopify.shop').create({ data: props });

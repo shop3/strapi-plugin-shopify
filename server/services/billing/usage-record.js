@@ -48,9 +48,9 @@ module.exports = createCoreService('plugin::shopify.usage-record', ({ strapi }) 
     // create usage record on db
     const result = await super.create({
       data: {
-        id: usageRecordId,
         price,
         subscription: subscriptionDb.data.id,
+        shopify_id: usageRecordId,
       },
     });
     return result;

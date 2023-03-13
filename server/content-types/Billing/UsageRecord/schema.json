@@ -24,6 +24,12 @@
       "inversedBy": "usage_records",
       "required": true,
       "configurable": false
+    },
+    "shopify_id": {
+      "type": "biginteger",
+      "required": true,
+      "unique": true,
+      "configurable": false
     }
   }
 }

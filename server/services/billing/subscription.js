@@ -43,6 +43,7 @@ module.exports = createCoreService('plugin::shopify.subscription', ({ strapi }) 
         test: subscription.test,
         shop: shop.id,
         plan: planId,
+        shopify_id: subscriptionId,
       },
     });
     return confirmationUrl;
