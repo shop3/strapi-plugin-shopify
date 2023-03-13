@@ -24,28 +24,32 @@ module.exports = createCoreService('plugin::shopify.shop', ({ strapi }) => ({
       // assing shop
       props = { ...response.body.shop, ...props };
     }
+    // replace id
+    const { id: shopify_id, ...shopData } = props;
+    props = { ...shopData, shopify_id };
     // create shop
     return strapi.db.query('plugin::shopify.shop').create({ data: props });
   },
 
   async update(...args) {
-    let id, shop, props, token;
+    let shop, props, token;
     if (typeof args[0] === 'string' && typeof args[1] === 'string') {
       [shop, token] = args;
-    } else if ((typeof args[0] === 'number' || typeof args[0] === 'string') && typeof args[1] === 'object') {
-      [id, props, token] = args;
-      shop = props.domain;
+    } else if (typeof args[0] === 'string' && typeof args[1] === 'object') {
+      [shop, props, token] = args;
     }
     if (typeof shop === 'string' && typeof token === 'string') {
       // get shop data
       const client = new Shopify.Clients.Rest(shop, token);
       const response = await client.get({ path: 'shop' });
       // assing shop
-      id = response.body.shop.id;
       props = { ...response.body.shop, ...props };
     }
+    // replace id
+    const { id: shopify_id, ...shopData } = props;
+    props = { ...shopData, shopify_id };
     // update shop
-    return strapi.db.query('plugin::shopify.shop').update({ where: { id }, data: props });
+    return strapi.db.query('plugin::shopify.shop').update({ where: { domain: { $eq: shop } }, data: props });
   },
 
   async install(shop, token) {
@@ -56,7 +60,7 @@ module.exports = createCoreService('plugin::shopify.shop', ({ strapi }) => ({
       if (!shopDb) {
         await this.create({ domain: shop, installed: true }, token);
       } else {
-        await this.update(shopDb.id, { domain: shop, installed: true }, token);
+        await this.update(shop, { domain: shop, installed: true }, token);
       }
       await lifecycles.run('afterInstall', shop);
       strapi.log.info(`Shop ${shop} installed successfully`);
@@ -73,7 +77,7 @@ module.exports = createCoreService('plugin::shopify.shop', ({ strapi }) => ({
       } else {
         const lifecycles = strapi.service('plugin::shopify.lifecycles');
         await lifecycles.run('beforeUninstall', shop);
-        await this.update(shopDb.id, { domain: shop, installed: false });
+        await this.update(shop, { domain: shop, installed: false });
         await lifecycles.run('afterUninstall', shop);
         await strapi.service('plugin::shopify.session').deleteShopSessions(shop);
         strapi.log.info(`Shop ${shop} uninstalled successfully`);
@@ -92,6 +96,7 @@ module.exports = createCoreService('plugin::shopify.shop', ({ strapi }) => ({
       strapi.log.error(`Failed to check if is installed ${shop} - ${e.message}`);
     }
   },
+
   async deleteByDomain(domain) {
     const shopDb = await strapi.db.query('plugin::shopify.shop').delete({ where: { domain: shop } });
     return shopDb;
