@@ -36,7 +36,7 @@ module.exports = createCoreService('plugin::shopify.subscription', ({ strapi }) 
     // create subscription on db
     await super.create({
       data: {
-        id: subscriptionId,
+        shopify_id: subscriptionId,
         status: 'PENDING',
         trial_ends_on: trialEndsOn,
         confirmation_url: confirmationUrl,
