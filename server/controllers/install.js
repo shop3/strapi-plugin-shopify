@@ -20,16 +20,31 @@ module.exports = ({ strapi }) => ({
   },
 
   async callback(ctx) {
-    const { query } = ctx;
-    // validate authentication callback
-    const session = await Shopify.Auth.validateAuthCallback(ctx.req, ctx.res, query);
-    const { shop, accessToken } = session;
-    // install shop
-    await strapi.service('plugin::shopify.shop').install(shop, accessToken);
-    // register webhooks
-    await strapi.service('plugin::shopify.shopify').registerWebhooks(shop, accessToken);
-    // redirect to authentication
-    const utils = strapi.service('plugin::shopify.utils');
-    ctx.redirect(`/api/shopify/auth?${utils.generateQuery({ shop })}`);
+    try {
+      const { query } = ctx;
+      // validate authentication callback
+      const session = await Shopify.Auth.validateAuthCallback(ctx.req, ctx.res, query);
+      const { shop, accessToken } = session;
+      // install shop
+      await strapi.service('plugin::shopify.shop').install(shop, accessToken);
+      // register webhooks
+      await strapi.service('plugin::shopify.shopify').registerWebhooks(shop, accessToken);
+      // redirect to authentication
+      const utils = strapi.service('plugin::shopify.utils');
+      ctx.redirect(`/api/shopify/auth?${utils.generateQuery({ shop })}`);
+    } catch (e) {
+      switch (true) {
+        case e instanceof Shopify.Errors.CookieNotFound:
+        case e instanceof Shopify.Errors.SessionNotFound:
+          const utils = strapi.service('plugin::shopify.utils');
+          ctx.redirect(`/api/shopify/install?${utils.generateQuery({ shop })}`);
+          return;
+        case e instanceof Shopify.Errors.ShopifyError:
+          ctx.throw(500, e.message);
+          return;
+        default:
+          ctx.throw(500, `Failed to complete OAuth installation process: ${e.message}`);
+      }
+    }
   },
 });
