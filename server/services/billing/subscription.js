@@ -53,7 +53,6 @@ module.exports = createCoreService('plugin::shopify.subscription', ({ strapi }) 
     if (_.isEmpty(subscription.data)) {
       return;
     }
-    console.log("dddddddddddddddddddddd", subscription.data.shopify_id)
     await strapi.db.query('plugin::shopify.subscription').update({ where: { shopify_id: subscription.data.shopify_id }, data: { status: 'CANCELLED' } });
   },
 
