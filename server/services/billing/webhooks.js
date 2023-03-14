@@ -12,7 +12,7 @@ const enabledExport = ({ strapi }) => ({
     // run before subscribe lifecycles
     if (status === 'ACTIVE') await lifecycles.run('beforeSubscribe', shop);
     // update subscription
-    await subscriptionService.update(id, { data: { status } });
+    await subscriptionService.update({ filters: { shopify_id: { $eq: id } } }, { status });
     // run after subscribe lifecycles
     if (status === 'ACTIVE') await lifecycles.run('afterSubscribe', shop);
     strapi.log.info(`Subscription ${id} updated successfully to ${status}`);
