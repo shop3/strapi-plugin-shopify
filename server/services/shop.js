@@ -97,8 +97,25 @@ module.exports = createCoreService('plugin::shopify.shop', ({ strapi }) => ({
     }
   },
 
-  async deleteByDomain(domain) {
-    const shopDb = await strapi.db.query('plugin::shopify.shop').delete({ where: { domain: shop } });
-    return shopDb;
+  async redact(shop) {
+    try {
+      const shopModel = strapi.plugins.shopify.contentType('shop');
+      const shopAttributes = Object.keys(shopModel.attributes).filter(x => {
+        const keepAttributesList = [
+          'shopify_id',
+          'domain',
+          'email',
+          'installed',
+          'createdAt',
+          'updatedAt',
+          'createdBy',
+          'updatedBy',
+        ];
+        return !keepAttributesList.includes(x)
+      });
+      await strapi.db.query('plugin::shopify.shop').update({ where: { domain: { $eq: shop } }, data: shopAttributes.reduce((acc, curr) => ({ ...acc, [curr]: null }), {}) });
+    } catch (e) {
+      strapi.log.error(`Failed to redact ${shop} - ${e.message}`);
+    }
   }
 }));

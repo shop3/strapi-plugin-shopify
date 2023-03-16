@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/shop3/strapi-plugin-shopify/compare/v0.2.1...v0.3.0) (2023-03-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* added shopify_id to shop
+
+### Features
+
+* added plan admin routes permissions ([ca194f6](https://github.com/shop3/strapi-plugin-shopify/commit/ca194f64b5d279ffe526d6a8a7044bd3a52be9ed))
+* added plan API for admin panel ([3886177](https://github.com/shop3/strapi-plugin-shopify/commit/3886177ba6f8af2dc7d763a9753c7a3fc3c82b07))
+* added shopify_id to shop ([fb6293d](https://github.com/shop3/strapi-plugin-shopify/commit/fb6293d2919ad245c459eebdc8a67677a2606537))
+* Admin panel Plan UI ([587169a](https://github.com/shop3/strapi-plugin-shopify/commit/587169ac95b44b5a8d04af2f22fddb180bddbad4))
+* error handling for install and auth callbacks ([4655053](https://github.com/shop3/strapi-plugin-shopify/commit/4655053edc49c648c97b63d294a780d2f9799bb9))
+* refactored admin panel plan with native design components ([5e6df58](https://github.com/shop3/strapi-plugin-shopify/commit/5e6df58c54fe96323b1c0e769f6bdd60776716bf))
+* shop redact endpoint ([3974544](https://github.com/shop3/strapi-plugin-shopify/commit/39745442e3980c04ddbcd7730c45e9078170bea7))
+* shopify_id in subscription and usage record ([57da423](https://github.com/shop3/strapi-plugin-shopify/commit/57da423b32ee8c33bf8688991fbc13cf2677f109))
+
 ### [0.2.1](https://github.com/shop3/strapi-plugin-shopify/compare/v0.2.0...v0.2.1) (2023-01-04)
 
 
