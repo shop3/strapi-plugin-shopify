@@ -12,6 +12,7 @@ const Modal = ({ setIsOpen, setStatus, setItem, item }) => {
   const [currencyCode, setCurrencyCode] = useState(item.currencyCode);
   const [trialDays, setTrialDays] = useState(item.trialDays);
   const [test, setTest] = useState(item.test);
+  const [oneTimePrice, setOneTimePrice] = useState(item.oneTimePrice)
 
   const handleSave = async () => {
     const id = item.id
@@ -23,7 +24,8 @@ const Modal = ({ setIsOpen, setStatus, setItem, item }) => {
       "usageCappedAmount" : usageCappedAmount,
       "currencyCode" : currencyCode,
       "trialDays" : trialDays,
-      "test" : test
+      "test" : test,
+      "oneTimePrice" : oneTimePrice
     }
 
     if(id==='') {
@@ -44,7 +46,7 @@ const Modal = ({ setIsOpen, setStatus, setItem, item }) => {
     <>
       <Box position="absolute" top="50%" left="50%" width="100vw" height="100vh" style={{transform: "translate(-50%, -50%)", background: "rgba(0, 0, 0, 0.5)"}} onClick={() => setIsOpen(false)} />
       <Box position="fixed" top="50%" left="60%" style={{transform: "translate(-50%, -50%)"}}>
-        <Box width="800px" height="600px" background="neutral0" color="neutral0" padding="20px" hasRadius={true}>
+        <Box width="800px" height="700px" background="neutral0" color="neutral0" padding="20px" hasRadius={true}>
           <Box height="50px" background="neutral0" textAlign="center" padding="10px">
             {item.id==='' ? (<Typography variant="beta">Create Plan</Typography>) : (<Typography variant="beta">Edit Plan</Typography>)}
           </Box>
@@ -89,6 +91,13 @@ const Modal = ({ setIsOpen, setStatus, setItem, item }) => {
                 <GridItem  col={6}>
                   <NumberInput label="trialDays" hint="min. 0" onValueChange={value => setTrialDays(value)} value={trialDays} required />
                 </GridItem>
+                <GridItem  col={6}>
+                  <NumberInput label="oneTimePrice" hint="min. 0" onValueChange={value => setOneTimePrice(value)} value={oneTimePrice} required />
+                </GridItem>
+              </Grid>
+            </Box>
+            <Box marginBottom="30px">
+              <Grid gap="16px" >
                 <GridItem  col={6}>
                   <ToggleInput label="test" onLabel="True" offLabel="False" checked={test} onChange={e => setTest(e.target.checked)} />
                 </GridItem>

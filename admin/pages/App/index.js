@@ -19,7 +19,8 @@ const App = () => {
     usageCappedAmount: '',
     currencyCode: '',
     trialDays: '',
-    test: false
+    test: false,
+    oneTimePrice: ''
   })
 
   useEffect(() => {
@@ -38,7 +39,8 @@ const App = () => {
       usageCappedAmount: '',
       currencyCode: '',
       trialDays: '',
-      test: false
+      test: false,
+      oneTimePrice: ''
     })
     setIsOpen(true)
   }

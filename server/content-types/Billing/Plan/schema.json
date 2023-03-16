@@ -63,6 +63,12 @@
       "default": false,
       "required": true,
       "configurable": false
+    },
+    "oneTimePrice": {
+      "type": "decimal",
+      "required": true,
+      "min": 0,
+      "configurable": false
     }
   }
 }

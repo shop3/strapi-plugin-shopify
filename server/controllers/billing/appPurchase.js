@@ -19,7 +19,7 @@ module.exports = ({ strapi }) => ({
     const appPurchase = {
       planId: planId,
       name: plan.name,
-      price: plan.recurringPrice,
+      price: plan.oneTimePrice,
       currencyCode: plan.currencyCode,
       test: plan.test,
     };

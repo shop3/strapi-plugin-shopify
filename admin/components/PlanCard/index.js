@@ -34,6 +34,9 @@ const PlanCard = ( {data, setIsOpen, setItem} ) => {
           </Flex>
         </Box>
         <Box textAlign="left" marginTop="32px" paddingLeft="14px">
+          <Typography variant="delta" textTransform="uppercase" textColor="alternative600">oneTimePrice: {data.oneTimePrice}</Typography>
+        </Box>
+        <Box textAlign="left" marginTop="32px" paddingLeft="14px">
           <Typography variant="delta" textTransform="uppercase" textColor="alternative600">usageCappedAmount: {data.usageCappedAmount}</Typography>
           <Box marginTop="17px" marginBottom="17px">
             <Flex alignItems="center">
