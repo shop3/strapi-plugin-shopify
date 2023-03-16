@@ -26,7 +26,7 @@ module.exports = createCoreService('plugin::shopify.usage-record', ({ strapi }) 
     if (_.isEmpty(subscriptionDb.data)) throw new Error('Shop subscription not found');
     if (subscriptionDb.data.status !== 'ACTIVE') throw new Error('Shop subscription is not ACTIVE');
     // get shopify subscription
-    const subscriptionShopify = await subscriptionService.findOnShopify(subscriptionDb.data.id);
+    const subscriptionShopify = await subscriptionService.findOnShopify(subscriptionDb.data.shopify_id);
     // get capped amount
     const cappedAmount = Number(_.get(subscriptionShopify, 'usage.cappedAmount.amount'));
     // get balance used
@@ -39,16 +39,14 @@ module.exports = createCoreService('plugin::shopify.usage-record', ({ strapi }) 
     params.lineItemId = _.get(subscriptionShopify, 'usage.id');
     // get graphql client
     const client = new Shopify.Clients.Graphql(session.shop, session.accessToken);
-
     // create usage record on Shopify
     const { usageRecordGid } = await appUsageRecordCreate(client, params);
-
     // get numeric id from gid
     const usageRecordId = this.usageRecordGidToId(usageRecordGid);
     // create usage record on db
     const result = await super.create({
       data: {
-        id: usageRecordId,
+        shopify_id: usageRecordId,
         price,
         subscription: subscriptionDb.data.id,
       },
