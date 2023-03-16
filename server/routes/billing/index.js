@@ -2,12 +2,13 @@
 
 const planRoutes = require('./plan');
 const subscriptionRoutes = require('./subscription');
+const appPurchaseRoutes = require('./appPurchase');
 
 const disableBilling = process.env.SHOPIFY_DISABLE_BILLING === 'true';
 
 const enabledExport = {
   admin: [...planRoutes['admin']],
-  'content-api': [...planRoutes['content-api'], ...subscriptionRoutes],
+  'content-api': [...planRoutes['content-api'], ...subscriptionRoutes, ...appPurchaseRoutes],
 };
 
 const disabledExport = {

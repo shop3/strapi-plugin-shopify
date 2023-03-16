@@ -48,7 +48,7 @@ module.exports = createCoreService('plugin::shopify.usage-record', ({ strapi }) 
       data: {
         shopify_id: usageRecordId,
         price,
-        subscription: subscriptionDb.data.id,
+        subscription: subscriptionDb.data.shopify_id,
       },
     });
     return result;
