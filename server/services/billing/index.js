@@ -2,6 +2,7 @@
 
 const plan = require('./plan');
 const subscription = require('./subscription');
+const appPurchase = require('./appPurchase');
 const usageRecord = require('./usage-record');
 const initialize = require('./initialize');
 const utils = require('./utils');
@@ -14,6 +15,7 @@ const enabledExport = {
   'usage-record': usageRecord,
   'billing-init': initialize,
   'billing-utils': utils,
+  appPurchase: appPurchase,
 };
 
 module.exports = !disableBilling ? enabledExport : {};
