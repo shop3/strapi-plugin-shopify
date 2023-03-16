@@ -9,4 +9,12 @@ module.exports = createCoreController('plugin::shopify.shop', ({ strapi }) => ({
     const shopData = await strapi.service('plugin::shopify.shop').findByDomain(session.shop);
     ctx.send(shopData);
   },
+
+  redact: async (ctx) => {
+    const domain = _.get(ctx, 'request.body.shop_domain');
+    await strapi.service('plugin::shopify.shop').redact(domain);
+    ctx.send({
+      message: 'ok',
+    })
+  },
 }));
