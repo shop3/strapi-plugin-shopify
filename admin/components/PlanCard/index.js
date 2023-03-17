@@ -22,19 +22,16 @@ const PlanCard = ( {data, setIsOpen, setItem} ) => {
         <Typography textTransform="uppercase" textAlign="center" variant="alpha" textColor="alternative600">{data.name}</Typography>
         <Box height="300px" width="100%" marginTop={4} background="neutral0" hasRadius={true} padding={7}>
           <Flex direction="column" justifyContent="flex-end">
-            <Typography textColor="buttonPrimary600" textAlign="center" variant="alpha" style={{ fontSize: "43px"}}>{data.recurringPrice+data.currencyCode}</Typography>
+            <Typography textColor="buttonPrimary600" textAlign="center" variant="alpha" style={{ fontSize: "43px"}}>{data.paymentsMode ? data.recurringPrice : data.oneTimePrice + data.currencyCode}</Typography>
             <Box marginTop={6} marginBottom={5} >
               <Flex justifyContent="center" gap={2}>
-                <Typography style={{ fontSize: "13px"}}>{data.recurringInterval}</Typography>
+                <Typography style={{ fontSize: "13px"}}>{data.paymentsMode ? data.recurringInterval : "ONE TIME PURCHASE"}</Typography>
                 <Info style={{ color: "#b6b4ff" }} />
               </Flex>
             </Box>
             <Button  fullWidth size="L"  style={{ backgroundColor: "#8c4bff" }}>Buy now</Button>
             <Typography variant="epsilon" textColor="alternative600" style={{ margin: "13px"}}>Free Enterprise Edition trial: {data.trialDays}</Typography>
           </Flex>
-        </Box>
-        <Box textAlign="left" marginTop="32px" paddingLeft="14px">
-          <Typography variant="delta" textTransform="uppercase" textColor="alternative600">oneTimePrice: {data.oneTimePrice}</Typography>
         </Box>
         <Box textAlign="left" marginTop="32px" paddingLeft="14px">
           <Typography variant="delta" textTransform="uppercase" textColor="alternative600">usageCappedAmount: {data.usageCappedAmount}</Typography>

@@ -21,13 +21,11 @@ const enabledExport = ({ strapi }) => ({
     const appPurchaseService = strapi.service('plugin::shopify.appPurchase');
     const gid = body.app_purchase_one_time.admin_graphql_api_id;
     const id = appPurchaseService.appPurchaseGidToId(gid);
-    console.log("ddddddddddddddd", id);
     const status = body.app_purchase_one_time.status;
     const lifecycles = strapi.service('plugin::shopify.lifecycles');
     // run before subscribe lifecycles
     if (status === 'ACTIVE') await lifecycles.run('beforeSubscribe', shop);
     // update subscription
-    console.log("fffffffffffffffffffffffff");
     await strapi.db.query('plugin::shopify.app-purchase').update({where: {shopify_id: id }, data: { status: status }});
     // run after subscribe lifecycles
     if (status === 'ACTIVE') await lifecycles.run('afterSubscribe', shop);

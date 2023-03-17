@@ -20,7 +20,8 @@ const App = () => {
     currencyCode: '',
     trialDays: '',
     test: false,
-    oneTimePrice: ''
+    oneTimePrice: '',
+    paymentsMode: true
   })
 
   useEffect(() => {
@@ -40,7 +41,8 @@ const App = () => {
       currencyCode: '',
       trialDays: '',
       test: false,
-      oneTimePrice: ''
+      oneTimePrice: '',
+      paymentsMode: true
     })
     setIsOpen(true)
   }

@@ -12,7 +12,8 @@ const Modal = ({ setIsOpen, setStatus, setItem, item }) => {
   const [currencyCode, setCurrencyCode] = useState(item.currencyCode);
   const [trialDays, setTrialDays] = useState(item.trialDays);
   const [test, setTest] = useState(item.test);
-  const [oneTimePrice, setOneTimePrice] = useState(item.oneTimePrice)
+  const [oneTimePrice, setOneTimePrice] = useState(item.oneTimePrice);
+  const [paymentsMode, setPaymentsMode] = useState(item.paymentsMode);
 
   const handleSave = async () => {
     const id = item.id
@@ -25,7 +26,8 @@ const Modal = ({ setIsOpen, setStatus, setItem, item }) => {
       "currencyCode" : currencyCode,
       "trialDays" : trialDays,
       "test" : test,
-      "oneTimePrice" : oneTimePrice
+      "oneTimePrice" : oneTimePrice,
+      "paymentsMode" : paymentsMode
     }
 
     if(id==='') {
@@ -57,17 +59,27 @@ const Modal = ({ setIsOpen, setStatus, setItem, item }) => {
                   <TextInput label="Name" onChange={e => setName(e.target.value)} value={name} required />
                 </GridItem>
                 <GridItem  col={6}>
-                  <NumberInput label="recurringPrice" hint="min. 0 characters" step={0.01} onValueChange={value => setRecurringPrice(value)} value={recurringPrice} required />
+                  <ToggleInput label="PaymentsMode" onLabel="recuring" offLabel="oneTime" checked={paymentsMode} onChange={e => setPaymentsMode(e.target.checked)} />
                 </GridItem>
               </Grid>
             </Box>
             <Box marginBottom="30px">
               <Grid gap="16px" >
                 <GridItem  col={6}>
-                  <Select label="recurringInterval" value={recurringInterval} onChange={setRecurringInterval}  required >
+                  <NumberInput label="recurringPrice" hint="min. 0 characters" step={0.01} onValueChange={value => setRecurringPrice(value)} value={recurringPrice} disabled={!paymentsMode} required />
+                </GridItem>
+                <GridItem  col={6}>
+                  <Select label="recurringInterval" value={recurringInterval} onChange={setRecurringInterval} disabled={!paymentsMode}  required >
                     <Option value="EVERY_30_DAYS">EVERY_30_DAYS</Option>
                     <Option value="ANNUAL">ANNUAL</Option>
                   </Select>
+                </GridItem>
+              </Grid>
+            </Box>
+            <Box marginBottom="30px">
+              <Grid gap="16px" >
+                <GridItem  col={6}>
+                  <NumberInput label="oneTimePrice" hint="min. 0" onValueChange={value => setOneTimePrice(value)} value={oneTimePrice} disabled={paymentsMode} required />
                 </GridItem>
                 <GridItem  col={6}>
                   <Textarea label="usageTerms" onChange={e => setUsageTerms(e.target.value)} value={usageTerms} required />
@@ -91,13 +103,6 @@ const Modal = ({ setIsOpen, setStatus, setItem, item }) => {
                 <GridItem  col={6}>
                   <NumberInput label="trialDays" hint="min. 0" onValueChange={value => setTrialDays(value)} value={trialDays} required />
                 </GridItem>
-                <GridItem  col={6}>
-                  <NumberInput label="oneTimePrice" hint="min. 0" onValueChange={value => setOneTimePrice(value)} value={oneTimePrice} required />
-                </GridItem>
-              </Grid>
-            </Box>
-            <Box marginBottom="30px">
-              <Grid gap="16px" >
                 <GridItem  col={6}>
                   <ToggleInput label="test" onLabel="True" offLabel="False" checked={test} onChange={e => setTest(e.target.checked)} />
                 </GridItem>
