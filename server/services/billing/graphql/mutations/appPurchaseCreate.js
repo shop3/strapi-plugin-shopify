@@ -19,6 +19,7 @@ module.exports = async (client, params) => {
     name: params.name,
     price: { amount: params.price, currencyCode: params.currencyCode },
     returnUrl: params.returnUrl,
+    test: params.test,
   };
   const { body } = await client.query({
     data: {
@@ -51,11 +52,13 @@ mutation 	appPurchaseOneTimeCreate(
   $name: String!
   $price: MoneyInput!
   $returnUrl: URL!
+  $test: Boolean
 ) {
   appPurchaseOneTimeCreate(
     name: $name
     price: $price
     returnUrl: $returnUrl
+    test: $test
   ) {
     userErrors {
       field

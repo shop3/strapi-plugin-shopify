@@ -18,20 +18,21 @@ const enabledExport = ({ strapi }) => ({
     strapi.log.info(`Subscription ${id} updated successfully to ${status}`);
   },
   APP_PURCHASES_ONE_TIME_UPDATE: async (topic, shop, body) => {
-    console.log("ddddddddddddddd", body);
-    const appPurchaseService = strapi.service('plugin::shopify.app-purchase');
+    const appPurchaseService = strapi.service('plugin::shopify.appPurchase');
     const gid = body.app_purchase_one_time.admin_graphql_api_id;
     const id = appPurchaseService.appPurchaseGidToId(gid);
+    console.log("ddddddddddddddd", id);
     const status = body.app_purchase_one_time.status;
     const lifecycles = strapi.service('plugin::shopify.lifecycles');
     // run before subscribe lifecycles
     if (status === 'ACTIVE') await lifecycles.run('beforeSubscribe', shop);
     // update subscription
-    await strapi.db.query('plugin::shopify.app_purchase').update({where: {shopify_id: id }, data: { status: status }});
+    console.log("fffffffffffffffffffffffff");
+    await strapi.db.query('plugin::shopify.app-purchase').update({where: {shopify_id: id }, data: { status: status }});
     // run after subscribe lifecycles
     if (status === 'ACTIVE') await lifecycles.run('afterSubscribe', shop);
     strapi.log.info(`app_purchase_one_time ${id} updated successfully to ${status}`);
-  }
+  },
 });
 
 module.exports = ({ strapi }) => (!disableBilling ? enabledExport({ strapi }) : {});
