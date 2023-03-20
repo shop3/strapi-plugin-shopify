@@ -13,7 +13,7 @@ module.exports = [
   {
     method: 'POST',
     path: '/shopify/webhooks/gdpr/shop/redact',
-    handler: 'shop.delete',
+    handler: 'shop.redact',
     config: {
       auth: false,
       prefix: '',
