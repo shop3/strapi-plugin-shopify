@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shopify_app_purchases",
+  "info": {
+    "singularName": "app-purchase",
+    "pluralName": "app-purchases",
+    "displayName": "App Purchase",
+    "name": "App Purchase"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "shopify_id": {
+      "type": "biginteger",
+      "required": true,
+      "unique": true,
+      "configurable": false
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "configurable": false
+    },
+    "price": {
+      "type": "decimal",
+      "required": true,
+      "min": 0,
+      "configurable": false
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "PENDING",
+        "ACTIVE",
+        "DECLINED",
+        "EXPIRED",
+        "ACCEPTED"
+      ],
+      "required": true,
+      "configurable": false
+    },
+    "test": {
+      "type": "boolean",
+      "default": false,
+      "required": true,
+      "configurable": false
+    }
+  }
+}

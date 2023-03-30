@@ -18,7 +18,6 @@
     },
     "recurringPrice": {
       "type": "decimal",
-      "required": true,
       "min": 0,
       "configurable": false
     },
@@ -28,7 +27,6 @@
         "EVERY_30_DAYS",
         "ANNUAL"
       ],
-      "required": true,
       "configurable": false
     },
     "usageTerms": {
@@ -61,6 +59,17 @@
     "test": {
       "type": "boolean",
       "default": false,
+      "required": true,
+      "configurable": false
+    },
+    "oneTimePrice": {
+      "type": "decimal",
+      "min": 0,
+      "configurable": false
+    },
+    "paymentsMode": {
+      "type": "boolean",
+      "default": true,
       "required": true,
       "configurable": false
     }

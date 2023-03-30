@@ -12,6 +12,8 @@ const Modal = ({ setIsOpen, setStatus, setItem, item }) => {
   const [currencyCode, setCurrencyCode] = useState(item.currencyCode);
   const [trialDays, setTrialDays] = useState(item.trialDays);
   const [test, setTest] = useState(item.test);
+  const [oneTimePrice, setOneTimePrice] = useState(item.oneTimePrice);
+  const [paymentsMode, setPaymentsMode] = useState(item.paymentsMode);
 
   const handleSave = async () => {
     const id = item.id
@@ -23,7 +25,9 @@ const Modal = ({ setIsOpen, setStatus, setItem, item }) => {
       "usageCappedAmount" : usageCappedAmount,
       "currencyCode" : currencyCode,
       "trialDays" : trialDays,
-      "test" : test
+      "test" : test,
+      "oneTimePrice" : oneTimePrice,
+      "paymentsMode" : paymentsMode
     }
 
     if(id==='') {
@@ -44,7 +48,7 @@ const Modal = ({ setIsOpen, setStatus, setItem, item }) => {
     <>
       <Box position="absolute" top="50%" left="50%" width="100vw" height="100vh" style={{transform: "translate(-50%, -50%)", background: "rgba(0, 0, 0, 0.5)"}} onClick={() => setIsOpen(false)} />
       <Box position="fixed" top="50%" left="60%" style={{transform: "translate(-50%, -50%)"}}>
-        <Box width="800px" height="600px" background="neutral0" color="neutral0" padding="20px" hasRadius={true}>
+        <Box width="800px" height="700px" background="neutral0" color="neutral0" padding="20px" hasRadius={true}>
           <Box height="50px" background="neutral0" textAlign="center" padding="10px">
             {item.id==='' ? (<Typography variant="beta">Create Plan</Typography>) : (<Typography variant="beta">Edit Plan</Typography>)}
           </Box>
@@ -55,17 +59,27 @@ const Modal = ({ setIsOpen, setStatus, setItem, item }) => {
                   <TextInput label="Name" onChange={e => setName(e.target.value)} value={name} required />
                 </GridItem>
                 <GridItem  col={6}>
-                  <NumberInput label="recurringPrice" hint="min. 0 characters" step={0.01} onValueChange={value => setRecurringPrice(value)} value={recurringPrice} required />
+                  <ToggleInput label="PaymentsMode" onLabel="recuring" offLabel="oneTime" checked={paymentsMode} onChange={e => setPaymentsMode(e.target.checked)} />
                 </GridItem>
               </Grid>
             </Box>
             <Box marginBottom="30px">
               <Grid gap="16px" >
                 <GridItem  col={6}>
-                  <Select label="recurringInterval" value={recurringInterval} onChange={setRecurringInterval}  required >
+                  <NumberInput label="recurringPrice" hint="min. 0 characters" step={0.01} onValueChange={value => setRecurringPrice(value)} value={recurringPrice} disabled={!paymentsMode} required />
+                </GridItem>
+                <GridItem  col={6}>
+                  <Select label="recurringInterval" value={recurringInterval} onChange={setRecurringInterval} disabled={!paymentsMode}  required >
                     <Option value="EVERY_30_DAYS">EVERY_30_DAYS</Option>
                     <Option value="ANNUAL">ANNUAL</Option>
                   </Select>
+                </GridItem>
+              </Grid>
+            </Box>
+            <Box marginBottom="30px">
+              <Grid gap="16px" >
+                <GridItem  col={6}>
+                  <NumberInput label="oneTimePrice" hint="min. 0" onValueChange={value => setOneTimePrice(value)} value={oneTimePrice} disabled={paymentsMode} required />
                 </GridItem>
                 <GridItem  col={6}>
                   <Textarea label="usageTerms" onChange={e => setUsageTerms(e.target.value)} value={usageTerms} required />
