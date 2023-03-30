@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "daily_report",
+  "info": {
+    "singularName": "daily-report",
+    "pluralName": "daily-reports",
+    "displayName": "Daily Report",
+    "name": "Daily Report"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "installedShop": {
+      "type": "integer",
+      "required": true,
+      "min": 0,
+      "configurable": false
+    },
+    "uninstalledShop": {
+      "type": "integer",
+      "required": true,
+      "min": 0,
+      "configurable": false
+    },
+    "increasedRevenue": {
+      "type": "decimal",
+      "required": true,
+      "min": 0,
+      "configurable": false
+    },
+    "decreasedRevenue": {
+      "type": "decimal",
+      "required": true,
+      "min": 0,
+      "configurable": false
+    },
+    "date": {
+      "type": "date",
+      "configurable": false
+    }
+  }
+}
